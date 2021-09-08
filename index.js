@@ -1,4 +1,4 @@
-const player = {
+const player = {//player-an object. songs-an array. each song- an object. id-key in each song object. 
   songs: [
     {
       id: 1,
@@ -48,12 +48,33 @@ const player = {
     { id: 5, name: 'Israeli', songs: [4, 5] },
   ],
   playSong(song) {
-    console.log(/* your code here */)
+    console.log(" Playing " + song.title + " from " + song.album + " by " + song.artist + " | " + secToMin(song.duration)+".")
   },
 }
 
+function secToMin(duration){
+  let min = Math.floor(duration/60)
+  let sec = duration%60
+  if(min<10 && sec<10){
+    return "0"+min +":"+ "0"+sec
+  }else if (min<10){
+    return "0"+min +":"+sec
+  }
+  else if (sec<10) {
+    return min +":"+ "0"+sec
+  }
+  else{
+    return min +":"+ sec
+  }
+}
+
+//Gets a song ID. Uses `player.playSong` to play the song with the given ID.
 function playSong(id) {
-  // your code here
+  for(let i=0 ; i<player.songs.length ; i++){
+    if(player.songs[i]["id"]===id){
+      return player.playSong(player.songs[i])
+    }
+  }
 }
 
 function removeSong(id) {
