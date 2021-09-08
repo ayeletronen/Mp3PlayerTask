@@ -74,27 +74,50 @@ function getSongById(id){
     }
   }
 }
+function isIdInSongs(id){
+  for(let i of player.songs)
+    if(i.id===id){
+      return true
+    }else{
+      return false
+    }
+}
 //Gets a song ID. Uses `player.playSong` to play the song with the given ID.
-function playSong(id) {
+function playSong(id){
       return player.playSong(getSongById(id))
 }
+function removeSong(id){
+  if(!isIdInSongs(id)){
+    throw "id is not existing"; 
+  } 
+  let song = getSongById(id)
+  let index = player.songs.indexOf(song)
+  player.songs.splice(index,1)
+  for(let j=0 ; j<player.playlists.length ; j++){
+    for(let k=0 ; k<player.playlists[j].songs.length ; k++){
+      if(player.playlists[j].songs[k]===id){
+      player.playlists[j].songs.splice(k,1)//להבין למה קיי ולא את כל השרשור של המקום
+      }
+    }
 
-function removeSong(id) {
-  for(let i=0 ; i<player.songs.length ; i++){
-    let song = getSongById(id)
-    let index = player.songs.indexOf(song)
-    player.songs.splice(index,1)
   }
 }
-
-function addSong(title, album, artist, duration, id) {
-  // your code here
+function addSong(title, album, artist, duration, id = ) {
+  let newSong = {
+    "id": id,
+    "title": title,
+    "album": album,
+    "artist": artist,
+    "duration": secToMin(duration)}
+  player.songs.push(newSong)
+  return id
 }
-
 function removePlaylist(id) {
-  // your code here
+  for(let i=0 ; i<player.playlists.length ; i++){
+    
+    player = player.songs.splice(index,1)
+  }
 }
-
 function createPlaylist(name, id) {
   // your code here
 }
