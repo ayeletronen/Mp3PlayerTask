@@ -147,9 +147,16 @@ function createPlaylist(name, id=5) {
   player.playlists.push(newPlaylist);
   return id
 }
-
 function playPlaylist(id) {
-  // your code here
+  if(!isIdInPlaylists(id)){
+    throw "id is not existing"; 
+  }
+  for(let p = 0 ; p < player.playlists.length ; p++) 
+    if(player.playlists[p]["id"]===id){
+      for(let n = 0 ; n < player.playlists[p].songs.length ; n++){
+        playSong(player.playlists[p].songs[n])
+      }
+    }
 }
 
 function editPlaylist(playlistId, songId) {
