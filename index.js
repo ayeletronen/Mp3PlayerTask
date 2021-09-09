@@ -82,6 +82,14 @@ function isIdInSongs(id){
       return false
     }
 }
+function isIdInPlaylists(id){
+  for(let i of player.playlists)
+    if(i.id===id){
+      return true
+    }else{
+      return false
+    }
+}
 //Gets a song ID. Uses `player.playSong` to play the song with the given ID.
 function playSong(id){
       return player.playSong(getSongById(id))
@@ -102,24 +110,42 @@ function removeSong(id){
 
   }
 }
-function addSong(title, album, artist, duration, id = ) {
+function addSong(title, album, artist, duration, id = 8) {//fix!!!!!!!!!
+  if(isIdInSongs(id)){
+    throw "id is taken"; 
+  }
+  let newDur = duration.split(":");
+  let min = (Number(newDur[0]))*60;
+  let sec = Number(newDur[1]);
+  let dur = min+sec;
   let newSong = {
     "id": id,
     "title": title,
     "album": album,
     "artist": artist,
-    "duration": secToMin(duration)}
+    "duration": dur}
   player.songs.push(newSong)
   return id
 }
-function removePlaylist(id) {
-  for(let i=0 ; i<player.playlists.length ; i++){
-    
-    player = player.songs.splice(index,1)
+function removePlaylist(id) {///fixxxxx!!!
+  if(!isIdInPlaylists(id)){
+    throw "id is not existing"; 
+  } 
+  for(let m=0 ; m<player.playlists.length ; m++){
+    if(player.playlists[m].id===id){
+      delete player.playlists[m];
+      player.playlists.length--;
+    }
   }
 }
 function createPlaylist(name, id) {
-  // your code here
+  if(isIdInPlaylists(id)){
+    throw "id is taken"; 
+  }
+  let newPlaylist = {};
+  newPlaylist = {"id": id, "name": name};
+  player.playlists.push(newPlaylist);
+  return id
 }
 
 function playPlaylist(id) {
