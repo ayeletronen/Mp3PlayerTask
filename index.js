@@ -138,12 +138,12 @@ function removePlaylist(id) {///fixxxxx!!!
     }
   }
 }
-function createPlaylist(name, id) {
+function createPlaylist(name, id=5) {
   if(isIdInPlaylists(id)){
     throw "id is taken"; 
   }
   let newPlaylist = {};
-  newPlaylist = {"id": id, "name": name};
+  newPlaylist = {"id": id, "name": name, "songs":[]};
   player.playlists.push(newPlaylist);
   return id
 }
