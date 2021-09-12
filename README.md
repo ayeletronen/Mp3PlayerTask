@@ -45,7 +45,6 @@ You are asked to implement the following functions:
 - `searchByQuery` - Gets a query string. Returns a results object, which has:
   - `songs`: an array of songs in which either title or album or artist contain the query string. The songs should be sorted by their titles.
   - `playlists`: an array of playlists in which the name contains the query string. The playlists should be sorted by their names.
-  
   The comparison in both cases should be case-insensitive.
 - `searchByDuration` - Gets a duration in `mm:ss` format (for example 11:03). Returns the song, or playlist, with the closest duration to what was given.
 
