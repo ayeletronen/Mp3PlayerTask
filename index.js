@@ -248,6 +248,7 @@ function searchByDuration(duration)
     return player.playlists[index2]
   } 
 }
+
 //helpers
 function compare2( a, b ) {
   if ( a.name < b.name ){
